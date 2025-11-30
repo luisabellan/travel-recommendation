@@ -21,8 +21,8 @@ const travelData = {
             location: "French Polynesia",
             description: "Surrounded by a lagoon and a barrier reef, Bora Bora offers stunning overwater bungalows and world-class diving opportunities in the heart of the South Pacific.",
             images: [
-                "https://images.unsplash.com/photo-1589197331516-2e2cd2f242c2?w=800&h=600&fit=crop",
-                "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&h=600&fit=crop"
+                "https://images.unsplash.com/photo-1580837119756-563d608dd119?w=800&h=600&fit=crop",
+                "https://images.unsplash.com/photo-1571757767119-68b8dbed8c97?w=800&h=600&fit=crop"
             ],
             type: "beach"
         }
