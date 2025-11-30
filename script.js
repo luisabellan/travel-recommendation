@@ -77,6 +77,9 @@ const travelData = {
     ]
 };
 
+// Combine all destinations for search
+const allDestinations = [...travelData.beaches, ...travelData.temples, ...travelData.countries];
+
 // ================
 // = DOM Elements =
 // ================
@@ -101,6 +104,37 @@ document.addEventListener('DOMContentLoaded', function() {
     if (countryContainer) {
         displayRecommendations(travelData.countries, countryContainer);
     }
+
+    // Search elements
+    const searchInput = document.getElementById('searchInput');
+    const searchBtn = document.getElementById('searchBtn');
+    const clearBtn = document.getElementById('clearBtn');
+    const resultsSection = document.getElementById('resultsSection');
+    const searchResults = document.getElementById('searchResults');
+
+    // ===========================
+    // Search Functionality
+    // ===========================
+    if (searchBtn) {
+        searchBtn.addEventListener('click', performSearch);
+    }
+
+    if (searchInput) {
+        searchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                performSearch();
+            }
+        });
+    }
+
+    if (clearBtn) {
+        clearBtn.addEventListener('click', function() {
+            searchInput.value = '';
+            resultsSection.style.display = 'none';
+            searchResults.innerHTML = '';
+        });
+    }
+
     // Navigation
     const mobileMenu = document.getElementById('mobile-menu');
     const navMenu = document.querySelector('.navbar__menu');
@@ -235,5 +269,58 @@ function bookDestination(event, destinationName) {
     alert(`Great choice! You've selected ${destinationName}. In a real application, this would take you to a booking page.`);
 }
 
+// ========================
+// = Search Functionality =
+// ========================
+function performSearch() {
+    const searchInput = document.getElementById('searchInput');
+    const query = searchInput.value.toLowerCase().trim();
+
+    if (query === '') {
+        alert('Please enter a search term');
+        return;
+    }
+
+    const resultsSection = document.getElementById('resultsSection');
+    const searchResults = document.getElementById('searchResults');
+
+    // Filter destinations based on search query
+    const results = allDestinations.filter(dest => {
+        return dest.name.toLowerCase().includes(query) ||
+               dest.location.toLowerCase().includes(query) ||
+               dest.description.toLowerCase().includes(query) ||
+               dest.type.toLowerCase().includes(query);
+    });
+
+    // Display results
+    if (results.length > 0) {
+        resultsSection.style.display = 'block';
+        searchResults.innerHTML = results.map(dest => createDestinationCard(dest)).join('');
+
+        // Initialize carousels for search results
+        results.forEach(dest => {
+            initializeImageCarousel(dest.id);
+        });
+
+        // Scroll to results
+        resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+        resultsSection.style.display = 'block';
+        searchResults.innerHTML = `
+            <div style="grid-column: 1 / -1; text-align: center; padding: 3rem;">
+                <h3 style="font-size: 1.5rem; margin-bottom: 1rem;">No results found</h3>
+                <p style="color: var(--text-secondary);">
+                    We couldn't find any destinations matching "${query}".
+                    Try searching for "beach", "temple", or a country name.
+                </p>
+            </div>
+        `;
+        resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+}
+
 console.log('TravelFar Website Loaded');
-console.log('Beach Destinations:', travelData.beaches.length);
+console.log('Total Destinations:', allDestinations.length);
+console.log('Beaches:', travelData.beaches.length);
+console.log('Temples:', travelData.temples.length);
+console.log('Countries:', travelData.countries.length);
