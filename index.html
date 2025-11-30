@@ -39,6 +39,61 @@
                 ancient temples, or vibrant cities, our intelligent recommendation system guides you to memorable
                 experiences around the world.
             </p>
+            <div class="hero__search">
+                <input type="text" id="searchInput" class="hero__search-input" placeholder="Search for beaches, temples, countries...">
+                <button id="searchBtn" class="hero__search-btn">Search</button>
+                <button id="clearBtn" class="hero__clear-btn">Clear</button>
+            </div>
+        </div>
+    </section>
+<!-- ==========================
+     = Search Results Section =
+     ========================== -->
+    <section class="results" id="resultsSection" style="display: none;">
+        <div class="results__container">
+            <h2 class="results__title">Search Results</h2>
+            <div id="searchResults" class="results__grid"></div>
+        </div>
+    </section>
+<!-- ===========================
+     = Recommendations Section =
+     =========================== -->
+    <section class="recommendations">
+        <div class="recommendations__container">
+            <h2 class="recommendations__header">Popular Recommendations</h2>
+<!-- =========================
+     = Beach Recommendations =
+     ========================= -->
+            <div class="recommendations__category">
+                <h3 class="recommendations__category-title">🏖️ Beach Destinations</h3>
+                <div class="recommendations__grid" id="beachRecommendations">
+<!-- ===================================
+     = Will be populated by JavaScript =
+     =================================== -->
+                </div>
+            </div>
+<!-- ==========================
+     = Temple Recommendations =
+     ========================== -->
+            <div class="recommendations__category">
+                <h3 class="recommendations__category-title">🕌 Temple & Cultural Sites</h3>
+                <div class="recommendations__grid" id="templeRecommendations">
+<!-- ===================================
+     = Will be populated by JavaScript =
+     =================================== -->
+                </div>
+            </div>
+<!-- ===========================
+     = Country Recommendations =
+     =========================== -->
+            <div class="recommendations__category">
+                <h3 class="recommendations__category-title">🌍 Country Highlights</h3>
+                <div class="recommendations__grid" id="countryRecommendations">
+<!-- ===================================
+     = Will be populated by JavaScript =
+     =================================== -->
+                </div>
+            </div>
         </div>
     </section>
 <!-- ==========
@@ -54,5 +109,7 @@
             </div>
         </div>
     </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
